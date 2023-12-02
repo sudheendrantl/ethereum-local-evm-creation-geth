@@ -49,7 +49,7 @@ geth --password %node3passwordlocation% --datadir %node3dir%\%datadirname% accou
 
 echo:
 echo creating genesis.json and other temp files for this programs use
-python ..\utils\createfiles.py
+python createfiles.py
 
 echo:
 echo here is the content of %rootdir%\genesis.json
