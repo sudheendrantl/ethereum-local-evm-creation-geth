@@ -49,7 +49,7 @@ geth --password %node3passwordlocation% --datadir %node3dir%\%datadirname% accou
 
 echo:
 echo creating genesis.json and other temp files for this programs use
-python createfiles.py
+python ..\utils\createfiles.py
 
 echo:
 echo here is the content of %rootdir%\genesis.json
@@ -137,27 +137,28 @@ echo node3 public key : %node3pubkey%
 
 echo:
 echo starting bootnode %bootnodename% in %bnodedir%
-echo "%bootnodename%" cmd /k "bootnode -nodekey %bnodedir%\boot.key -addr :30305 --verbosity 7"
-start "%bootnodename%" cmd /k "bootnode -nodekey %bnodedir%\boot.key -addr :30305 --verbosity 7"
+echo "%bootnodename%" cmd /k "bootnode -nodekey %bnodedir%\boot.key -addr :30305 --verbosity 3"
+start "%bootnodename%" cmd /k "bootnode -nodekey %bnodedir%\boot.key -addr :30305 --verbosity 3"
 timeout /t 5
 
 echo:
 echo starting %node1name% in %node1dir%
-set cmd1="geth --datadir %node1dir%\%datadirname% --port %node1port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node1httpport% --http.corsdomain '*' --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node1pubkey% --password %node1passwordlocation% --authrpc.port %node1rpcport% --miner.etherbase %node1pubkey% --mine --syncmode "full" --verbosity 7 --vmdebug console"
+set cmd1="geth --datadir %node1dir%\%datadirname% --port %node1port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node1httpport% --http.corsdomain "*" --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node1pubkey% --password %node1passwordlocation% --authrpc.port %node1rpcport% --miner.etherbase %node1pubkey% --mine --syncmode "full" --verbosity 3 console"
+
 echo %cmd1%
 start "%node1name%" cmd /k %cmd1%
 timeout /t 1
 
 echo:
 echo starting %node2name% in %node2dir%
-set cmd2="geth --datadir %node2dir%\%datadirname% --port %node2port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node2httpport% --http.corsdomain '*' --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node2pubkey% --password %node2passwordlocation% --authrpc.port %node2rpcport% --miner.etherbase %node2pubkey% --mine --syncmode "full" --verbosity 7 --vmdebug console"
+set cmd2="geth --datadir %node2dir%\%datadirname% --port %node2port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node2httpport% --http.corsdomain "*" --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node2pubkey% --password %node2passwordlocation% --authrpc.port %node2rpcport% --miner.etherbase %node2pubkey% --mine --syncmode "full" --verbosity 3 console"
 echo %cmd2%
 start "%node2name%" cmd /k %cmd2%
 timeout /t 1
 
 echo:
 echo starting %node3name% in %node3dir%
-set cmd3="geth --datadir %node3dir%\%datadirname% --port %node3port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node3httpport% --http.corsdomain '*' --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node3pubkey% --password %node3passwordlocation% --authrpc.port %node3rpcport% --syncmode "full" --verbosity 7 --vmdebug console"
+set cmd3="geth --datadir %node3dir%\%datadirname% --port %node3port% --bootnodes %enodelink% --networkid %chainid% --ipcdisable --http --allow-insecure-unlock --http.port %node3httpport% --http.corsdomain "*" --http.vhosts "*" --http.api web3,eth,debug,personal,net --unlock %node3pubkey% --password %node3passwordlocation% --authrpc.port %node3rpcport% --syncmode "full" --verbosity 3 console"
 echo %cmd3%
 start "%node3name%" cmd /k %cmd3%
 timeout /t 1
